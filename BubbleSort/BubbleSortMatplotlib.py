@@ -26,5 +26,5 @@ def bubble_sort_visualization(data, ax):
                 plt.pause(0.1)
 
 bubble_sort_visualization(values, ax)
-plt.pause(1)  # Pause to view the final sorted plot
+plt.pause(1) 
 plt.show()
