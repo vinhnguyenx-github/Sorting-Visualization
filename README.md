@@ -4,9 +4,9 @@ This project utilizes Pygame and Matplotlib to create visualizations of various 
 
 ## Installation:
 
-use the package manager [pip][] to install Pygame and Matplotlib
+use the package manager [pip]() to install Pygame and Matplotlib
 
-'''bash
+```bash
 pip install pygame
 pip install Matplotlib
-'''
+```
