@@ -1,5 +1,5 @@
 import pygame
-import random
+import numpy
 
 pygame.init()
 
@@ -15,8 +15,8 @@ class Graph:
         self.screen_height = screen_height
         self.dataWidth = 1
         self.totalDataPoints = self.screen_width // self.dataWidth
-        self.dataLength = [random.randint(10, self.screen_height - 50) for _ in range(self.totalDataPoints)]
-        self.states = [0 for _ in range(self.totalDataPoints)]
+        self.dataLength = numpy.random.randint(10, self.screen_height - 50, self.totalDataPoints)
+        self.states = numpy.zeros((self.totalDataPoints,), dtype=int)
         self.counter = 0
 
     def draw(self):
@@ -43,7 +43,7 @@ class Graph:
             self.states[self.totalDataPoints - self.counter] = 2
 
 def main():
-    screen_width = 600
+    screen_width = 1000
     screen_height = 600
     screen = pygame.display.set_mode((screen_width, screen_height))
     clock = pygame.time.Clock()
