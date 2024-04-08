@@ -8,7 +8,7 @@ index = np.arange(0, n, 1)
 
 fig, ax = plt.subplots(figsize = (12, 6))
 bars = ax.bar(index, values)
-ax.set_title('Selection Sort Visualization')
+ax.set_title('Insertion Sort Visualization')
 ax.set_xlabel('Index')
 ax.set_ylabel('Value')
 ax.set_xticks(np.arange(0, n, 1))
@@ -17,17 +17,19 @@ def update_plot(heights, bars):
     for bar, height in zip(bars, heights):
         bar.set_height(height)
 
-def bubble_sort_visualization(data, ax):
-    for i in range(n):
-        min_index = i
-        for j in range(i+1, n):
-            if data[j] < data[min_index]:
-                min_index = j
-                plt.pause(0.00001)
+def insert_sort_visualization(data, ax):
+    for i in range (1, len(data)):
+        key = data[i]
+        j = i -1
 
-        data[i], data[min_index] = data[min_index], data[i]
+        while j >= 0 and key < data[j]:
+            data[j+1] = data[j]
+            j=j-1
+            update_plot(data, bars)
+            plt.pause(0.00001)
+            
+        data[j+1] = key
         update_plot(data, bars)
         plt.pause(0.00001)
-
-bubble_sort_visualization(values, ax)
+insert_sort_visualization(values, ax)
 plt.show()

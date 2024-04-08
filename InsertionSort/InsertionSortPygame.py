@@ -21,29 +21,36 @@ class Graph:
 
     def draw(self):
         for i in range(len(self.dataLength)):
-            color = WHITE if self.states[i] == 0 else (RED if self.states[i] == 1 else GREEN)
+            if self.states[i] == 0:
+                color = WHITE
+            elif self.states[i] == 1:
+                color = RED
+            elif self.states[i] == 2: 
+                color = GREEN
             pygame.draw.rect(self.screen, color,
                              (i * self.dataWidth, self.screen_height - self.dataLength[i],
                               self.dataWidth, self.dataLength[i]))
 
-    def bubble_sort(self):
+    def insertion_sort(self):
         if self.counter < self.totalDataPoints:
-            for j in range(self.totalDataPoints - 1 - self.counter):
-                if self.dataLength[j] > self.dataLength[j+1]:
-                    self.states[j] = 0
-                    self.states[j+1] = 0
-                    self.dataLength[j], self.dataLength[j+1] =  self.dataLength[j+1], self.dataLength[j]
-                else:
-                    self.states[j] = 1
-                    self.states[j+1] = 1
-                    
-        self.counter += 1
-        
-        if self.totalDataPoints - self.counter >= 0:
-            self.states[self.totalDataPoints - self.counter] = 2
+            key = self.dataLength[self.counter]
+            j = self.counter - 1
+            while j >= 0 and key < self.dataLength[j]:
+                self.states[j + 1] = 1
+                self.dataLength[j + 1] = self.dataLength[j]
+                j -= 1
+            self.dataLength[j + 1] = key
+            self.states[j + 1] = 2 
+            self.counter += 1
+        else:
+            self.counter = 0
+            if self.counter > self.totalDataPoints:
+                self.states[self.counter] = 2
+            
+            self.counter += 1
 
 def main():
-    screen_width = 1100
+    screen_width = 600
     screen_height = 600
     screen = pygame.display.set_mode((screen_width, screen_height))
     clock = pygame.time.Clock()
@@ -58,7 +65,7 @@ def main():
         screen.fill(BLACK)
 
         graph.draw()
-        graph.bubble_sort()
+        graph.insertion_sort()
 
         clock.tick(60)
         pygame.display.update()
